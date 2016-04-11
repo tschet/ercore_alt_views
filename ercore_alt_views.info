@@ -1,0 +1,17 @@
+name = ERCore Alternate Views
+description = Alternate Views for ERCore
+package = "EPSCoR"
+
+dependencies[] = er
+dependencies[] = semanticviews
+dependencies[] = views
+dependencies[] = views_data_export
+dependencies[] = views_data_export_phpexcel
+
+project = "EPSCoR"
+core = 7.x
+
+version = "7.x-1.0"
+
+stylesheets[all][] = css/ercore_alt_views.css
+;scripts[] = js/ercore_alt_views.js

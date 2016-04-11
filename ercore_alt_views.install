@@ -1,0 +1,133 @@
+<?php
+/**
+ * @file
+ * Install file for ercore_alt_views.
+ */
+
+/**
+ * Instance of hook_install.
+ */
+function ercore_alt_views_install() {
+  ercore_alt_views_views_set_display_status(FALSE);
+  ercore_alt_views_settings(TRUE);
+}
+
+/**
+ * Instance of hook_uninstall.
+ */
+function ercore_alt_views_uninstall() {
+  ercore_alt_views_views_set_display_status(TRUE);
+  ercore_alt_views_settings(FALSE);
+}
+
+/**
+ * Changes the view display status of conflicting view pages and exports.
+ *
+ * @param bool $status
+ *    Sets the enable or disable status of affected View displays.
+ *
+ * @return mixed
+ * @throws \DrupalUpdateException
+ */
+function ercore_alt_views_views_set_display_status($status = FALSE) {
+  $t = get_t();
+  $views_names = _ercore_alt_views_list();
+  $views_displays = array(
+    'page',
+    'views_data_export_1',
+    );
+  if ($status == FALSE) {
+    $status_display = 'disable';
+  }
+  else {
+    $status_display = 'enable';
+  }
+  $message = 'Attempting to ' . $status_display . ' conflicting View displays';
+
+  foreach ($views_names as $views_name) {
+
+    $disabled_displays = array();
+    $variables = array('@view_name' => $views_name);
+
+    $view = views_get_view($views_name);
+    if ($view) {
+      $message_displays = array();
+      foreach ($views_displays as $display_name) {
+        if (isset($view->display[$display_name])) {
+          $view->display[$display_name]->display_options['enabled'] = $status;
+          $disabled_displays[] = $display_name;
+
+          $message_displays[] = $display_name;
+          $message_condition = ' has ';
+          $message_status = 'status';
+        }
+        else {
+          $error_message = 'The view ' . $views_name . ' HAS NOT had the View display ' . $display_name . ' ' . $status_display . 'd.';
+          drupal_set_message($error_message, 'error');
+        }
+      }
+      $status_message = 'The view ' . $views_name . $message_condition . 'had the View displays Page and Data Export '. $status_display . 'd.';
+      drupal_set_message($status_message, $message_status);
+      views_save_view($view);
+    }
+
+    else {
+      $message = 'Unable to load @view_name from views.';
+      throw new DrupalUpdateException($t($message, $variables));
+    }
+
+    if (count($disabled_displays)) {
+      $message .= $status_display . 'd @view_name views displays named @displays. ';
+      $variables['@displays'] = implode(', ', $disabled_displays);
+
+      $missing_displays = array_diff($views_displays, $disabled_displays);
+      if (count($missing_displays)) {
+        $message .= 'Missing @view_name views displays named @displays could not be ' . $status_display . 'd.';
+        $variables['@missing'] = implode(', ', $missing_displays);
+      }
+    }
+    else {
+      $message = 'Nothing to do. No @view_name views displays named @displays found to ' . $status_display . '.';
+      $variables['@displays'] = implode(', ', $views_displays);
+    }
+  }
+  return $t($message, $variables);
+}
+
+
+/**
+ * Changes default field setting for field_er_collab_inst_ref.
+ *
+ *  * @param bool $select
+ *    Sets the enable or disable status of Entity reference field.
+ */
+function ercore_alt_views_settings($select = FALSE) {
+  $field = field_info_field('field_er_collab_inst_ref');
+  $field['settings']['handler_settings']['behaviors']['views-select-list']['status'] = $select;
+  field_update_field($field);
+}
+
+/**
+ * Builds list of ER module Views to modify on install and uninstall.
+ *
+ * @return array $view_names
+ *    Array of View Names to modfy.
+ */
+function _ercore_alt_views_list() {
+  $views_names = array(
+    'er_summary_er_award',
+    'er_summary_er_collaboration',
+    'er_summary_er_collaborators',
+    'er_summary_er_engagement',
+    'er_summary_er_event',
+    'er_summary_er_institution',
+    'er_summary_er_news',
+    'er_summary_er_other_product',
+    'er_summary_er_patent',
+    'er_summary_er_presentation',
+    'er_summary_er_proposal',
+    'er_summary_er_publication',
+    'er_summary_participants',
+  );
+  return $views_names;
+}
