@@ -10,7 +10,7 @@ planned.
 ## INSTALLATION ##
 Install as usual, see http://drupal.org/node/895232 for further information. 
 
-This moudle is entirely optional with ERCore (ER). It will not work with the 
+This module is entirely optional with ERCore (ER). It will not work with the 
 newer version of ERCore (ercore). This module should be immediately uninstalled 
 if not required. It should not be left deactivated, but not installed.
  
