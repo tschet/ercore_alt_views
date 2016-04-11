@@ -62,7 +62,7 @@ function ercore_alt_views_views_set_display_status($status = FALSE) {
           $message_status = 'status';
         }
         else {
-          $error_message = 'The view ' . $views_name . ' HAS NOT had the View display ' . $display_name . ' ' . $status_display . 'd.';
+          $error_message = 'The view ' . $views_name . ' <strong>HAS NOT</strong> had the View display ' . $display_name . ' ' . $status_display . 'd.';
           drupal_set_message($error_message, 'error');
         }
       }
