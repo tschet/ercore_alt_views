@@ -7,7 +7,7 @@ namespace of ER, which conflicts with an existing Drupal module (Entity
 Relationships). Development to fix this, and other Drupal standards compliance 
 issues, is planned.
 
-## INSTALLATION ##
+## Installation ##
 Install as usual, see 
 [http://drupal.org/node/895232](http://drupal.org/node/895232) for further 
 information. 
@@ -16,7 +16,7 @@ This module is entirely optional with ERCore (ER). It will not work with the
 newer version of ERCore (ercore). This module should be immediately uninstalled 
 if not required. It should not be left deactivated without uninstalling.
 
-### It has several module dependencies### 
+### It has several module dependencies ### 
   * [ER module](https://github.com/EPSCoR/ERCore-3.1): Not Entity Relationships!
   * [Semanticviews](https://www.drupal.org/project/semanticviews): Improves HTML 
 output and formtting control
@@ -30,10 +30,10 @@ The Views Data export PHPExcel has a dependency on the PHPExcel library.
   * PHPExcel [https://phpexcel.codeplex.com/](https://phpexcel.codeplex.com/) 
   library version >= 1.8.0
  
-## CONFIGURATION ##
+## Configuration ##
 There are no specific configuration settings for the ERCore Alt Views module.
  
-## CONTACT ##
+## Contact ##
 Current maintainer:
 Douglas Tschetter - [tschet](https://www.drupal.org/u/tschet)
 [Riven Design](http://rivendesign.com)
