@@ -35,7 +35,7 @@ function ercore_alt_views_views_data_alter(&$data) {
     'filter' => array(
       'handler' => 'views_handler_filter_string',
       'title' => t('Name'),
-      'help' => t("The user's actual, raw, username.")
+      'help' => t("The user's actual, raw, username."),
     ),
   );
 }

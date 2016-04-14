@@ -4456,15 +4456,6 @@ echo($active);
   $handler->display->display_options['fields']['field_er_journal_name']['table'] = 'field_data_field_er_journal_name';
   $handler->display->display_options['fields']['field_er_journal_name']['field'] = 'field_er_journal_name';
   $handler->display->display_options['fields']['field_er_journal_name']['element_label_colon'] = FALSE;
-  /* Field: Field: Project Component */
-  $handler->display->display_options['fields']['field_er_components']['id'] = 'field_er_components';
-  $handler->display->display_options['fields']['field_er_components']['table'] = 'field_data_field_er_components';
-  $handler->display->display_options['fields']['field_er_components']['field'] = 'field_er_components';
-  $handler->display->display_options['fields']['field_er_components']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_er_components']['settings'] = array(
-    'link' => 0,
-  );
-  $handler->display->display_options['fields']['field_er_components']['delta_offset'] = '0';
   $handler->display->display_options['path'] = 'publications/download';
   $handler->display->display_options['displays'] = array(
     'default' => 'default',

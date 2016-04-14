@@ -27,7 +27,10 @@ function ercore_alt_views_uninstall() {
  *    Sets the enable or disable status of affected View displays.
  *
  * @return mixed
- * @throws \DrupalUpdateException
+ *    Returns messages and/or values depending on function.
+ *
+ * @throws DrupalUpdateException
+ *    Throws exceptions when expected values do not exist.
  */
 function ercore_alt_views_views_set_display_status($status = FALSE) {
   $t = get_t();
@@ -35,7 +38,7 @@ function ercore_alt_views_views_set_display_status($status = FALSE) {
   $views_displays = array(
     'page',
     'views_data_export_1',
-    );
+  );
   if ($status == FALSE) {
     $status_display = 'disable';
   }
@@ -66,7 +69,7 @@ function ercore_alt_views_views_set_display_status($status = FALSE) {
           drupal_set_message($error_message, 'error');
         }
       }
-      $status_message = 'The view ' . $views_name . $message_condition . 'had the View displays Page and Data Export '. $status_display . 'd.';
+      $status_message = 'The view ' . $views_name . $message_condition . 'had the View displays Page and Data Export ' . $status_display . 'd.';
       drupal_set_message($status_message, $message_status);
       views_save_view($view);
     }
@@ -98,8 +101,8 @@ function ercore_alt_views_views_set_display_status($status = FALSE) {
 /**
  * Changes default field setting for field_er_collab_inst_ref.
  *
- *  * @param bool $select
- *    Sets the enable or disable status of Entity reference field.
+ * @param bool $select
+ *   Sets the enable or disable status of Entity reference field.
  */
 function ercore_alt_views_settings($select = FALSE) {
   $field = field_info_field('field_er_collab_inst_ref');
